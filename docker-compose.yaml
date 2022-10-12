@@ -1,0 +1,111 @@
+version: "2.3"
+services:
+  hass:
+    container_name: HomeAssistant
+    image: "ghcr.io/home-assistant/home-assistant:stable"
+    restart: unless-stopped
+    network_mode: host
+    cpus: 0.7
+    mem_limit: 256M
+    volumes:
+      - $PWD/hass:/config
+    environment:
+      TZ: "Asia/Shanghai"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "200m"
+        max-file: "3"
+
+  nodered:
+    container_name: NodeRed
+    image: nodered/node-red
+    restart: unless-stopped
+    network_mode: host
+    user: root
+    cpus: 0.7
+    mem_limit: 128M
+    volumes:
+      - $PWD/nodered:/data
+    environment:
+      TZ: "Asia/Shanghai"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "200m"
+        max-file: "3"
+
+  portainer:
+    container_name: Portainer
+    image: portainer/portainer:latest
+    network_mode: host
+    restart: unless-stopped
+    cpus: 0.1
+    mem_limit: 32M
+    volumes:
+      - $PWD/portainer:/data
+      - /var/run/docker.sock:/var/run/docker.sock
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "200m"
+        max-file: "3"
+
+  watchtower:
+    container_name: WatchTower
+    image: containrrr/watchtower:latest
+    restart: unless-stopped
+    command: --cleanup
+    network_mode: host
+    cpus: 0.1
+    mem_limit: 32M
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "200m"
+        max-file: "3"
+
+  httpd:
+    container_name: Httpd
+    image: httpd:latest
+    restart: unless-stopped
+    network_mode: host
+    user: root
+    cpus: 0.1
+    mem_limit: 32M
+    volumes:
+      - $PWD/httpd/html:/usr/local/apache2/htdocs/
+      - $PWD/httpd/conf/httpd.conf:/usr/local/apache2/conf/httpd.conf
+      - $PWD/httpd/conf/httpd-vhosts.conf:/usr/local/apache2/conf/extra/httpd-vhosts.conf
+      - $PWD/httpd/logs:/var/log/apache2
+    environment:
+      TZ: "Asia/Shanghai"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "200m"
+        max-file: "3"
+
+  ldap:
+    container_name: OpenLdap
+    image: osixia/openldap:latest
+    restart: unless-stopped
+    network_mode: host
+    cpus: 0.1
+    mem_limit: 32M
+    volumes:
+      - $PWD/ldap/lib:/var/lib/ldap
+      - $PWD/ldap/slapd.d:/etc/ldap/slapd.d
+    environment:
+      - TZ="Asia/Shanghai"
+      - LDAP_DOMAIN=home.com
+      - LDAP_ORGANISATION=S9053L
+      - LDAP_ADMIN_PASSWORD=admin
+      - LDAP_TLS='false'
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "200m"
+        max-file: "3"
