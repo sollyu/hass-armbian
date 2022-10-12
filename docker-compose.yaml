@@ -11,6 +11,8 @@ services:
       - $PWD/hass:/config
     environment:
       TZ: "Asia/Shanghai"
+    labels:
+      io.portainer.accesscontrol.teams: ldap-admin
     logging:
       driver: "json-file"
       options:
@@ -29,6 +31,8 @@ services:
       - $PWD/nodered:/data
     environment:
       TZ: "Asia/Shanghai"
+    labels:
+      io.portainer.accesscontrol.teams: ldap-admin
     logging:
       driver: "json-file"
       options:
@@ -45,6 +49,8 @@ services:
     volumes:
       - $PWD/portainer:/data
       - /var/run/docker.sock:/var/run/docker.sock
+    labels:
+      io.portainer.accesscontrol.teams: ldap-admin
     logging:
       driver: "json-file"
       options:
@@ -61,6 +67,8 @@ services:
     mem_limit: 32M
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+    labels:
+      io.portainer.accesscontrol.teams: ldap-admin
     logging:
       driver: "json-file"
       options:
@@ -82,6 +90,8 @@ services:
       - $PWD/httpd/logs:/var/log/apache2
     environment:
       TZ: "Asia/Shanghai"
+    labels:
+      io.portainer.accesscontrol.teams: ldap-admin
     logging:
       driver: "json-file"
       options:
@@ -104,6 +114,8 @@ services:
       - LDAP_ORGANISATION=S9053L
       - LDAP_ADMIN_PASSWORD=admin
       - LDAP_TLS='false'
+    labels:
+      io.portainer.accesscontrol.teams: ldap-admin
     logging:
       driver: "json-file"
       options:
