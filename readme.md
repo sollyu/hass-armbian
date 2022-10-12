@@ -1,6 +1,10 @@
 ## 📖 说明
 
-这是电视机顶盒个人使用Hass的套件服务，配置使用了httpd做了常用服务域名化，目前有下列服务：
+这是电视机顶盒个人使用Hass的套件服务，配置使用了httpd做了常用服务域名化和一些服务优化：
+
+✅ **网页缓存**  ✅ **统一登录**  ✅ **自动更新**  ✅ **内存限制**  ✅ **数据分离**
+
+目前有下列服务：
 
 ```txt
 hass.home.com     HomeAssistant
@@ -9,6 +13,7 @@ docker.home.com   Portainer.io
 ```
 
 配置详情参照：[httpd-vhosts.conf](./httpd/conf/httpd-vhosts.conf)
+
 
 ###### 🚧 注意：
 
@@ -36,6 +41,8 @@ docker.home.com   Portainer.io
 
 #### Portainer.io
 
+配置示例
+
 ```txt
 LDAP Server       ：127.0.0.1:389
 Base DN           ：dc=home,dc=com
@@ -43,9 +50,14 @@ Username attribute：uid
 Filter            ：(&(objectClass=posixAccount))
 ```
 
-###### 🚧 注意：
+###### 🚧 注意
 
 需要手动分配容器的访问权限，不然新账号里看不到内容。
+
+###### 📄 权限
+
+新登陆进来的LDAP用户，可以加入到`ldap-admin`的`teams`里，这样就能看到容器了。
+
 
 #### 🐔 Httpd
 
