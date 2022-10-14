@@ -31,9 +31,7 @@
 
 容器里内置了[OpenLdap](https://www.openldap.org/)作为统一登陆的账号管理服务，他的好处就是一个账户登陆各种服务，再也不用为一个服务一个账户密码而烦恼。
 
-首次安装时需要每个服务单独配置，如：Portainer。因为账户不需要频繁增删改查，所以就没配置在线管理账户的服务。
-
-如若需要添加账号，请使用第三方OpenLdap管理工具进行添加，如：[LdapAdmin](http://www.ldapadmin.org/download/index.html)，默认的管理员账号信息如下：
+首次安装时需要每个服务单独配置，如：Portainer。因为账户不需要频繁增删改查，所以就没配置在线管理账户的服务，同时也能节省盒子的资源。如若需要添加账号，可以使用第三方OpenLdap管理工具进行添加，如：[LdapAdmin](http://www.ldapadmin.org/download/index.html)，默认的管理员账号信息如下：
 
 ```txt
 管理员账号：cn=admin,dc=home,dc=com
