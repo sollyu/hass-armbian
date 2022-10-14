@@ -39,6 +39,8 @@
 ```
 
 > 如若修改管理员密码，请直接修改[docker-compose.yaml](./docker-compose.yaml#L105)的密码。
+> 
+> 操作指引，参与[Wiki](https://github.com/sollyu/hass-armbian/wiki/OpenLdap%E6%B7%BB%E5%8A%A0%E8%B4%A6%E6%88%B7)。
 
 #### Portainer.io
 
