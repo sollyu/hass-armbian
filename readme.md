@@ -1,36 +1,39 @@
 ## 📖 说明
 
-这是电视机顶盒个人使用Hass的套件服务，配置使用了httpd做了常用服务域名化和一些服务优化：
+这是电视机顶盒个人使用Hass的套件服务，配置使用了[Httpd](https://httpd.apache.org/)做了常用服务域名化和一些服务优化：
 
 ✅ **网页缓存**  ✅ **统一登录**  ✅ **自动更新**  ✅ **内存限制**  ✅ **数据分离**
 
-目前有下列服务：
+| 序号 | 名称          | 说明               | 域名            |
+|------|---------------|--------------------|-----------------|
+| 1    | HomeAssistant | Hass服务           | hass.home.com   |
+| 2    | NodeRed       | Hass辅助自动化     | red.home.com    |
+| 3    | Portainer     | Docker容器管理     | docker.home.com |
+| 4    | OpenLdap      | 统一账户管理       | -               |
+| 5    | Httpd         | Http服务           | -               |
+| 6    | WatchTower    | Docker镜像自动更新 | -               |
 
-```txt
-hass.home.com     HomeAssistant
-red.home.com      NodeRed
-docker.home.com   Portainer.io
-```
-
-配置详情参照：[httpd-vhosts.conf](./httpd/conf/httpd-vhosts.conf)
-
+> 域名配置详情参照：[httpd-vhosts.conf](./httpd/conf/httpd-vhosts.conf)
 
 ###### 🚧 注意：
 
-需要手动在本机或者路由器中指定[hosts](https://baike.baidu.com/item/hosts/10474546)为盒子IP，如我的配置如下：
+如果需要使用域名访问，请手动在本机或者路由器中指定[hosts](https://baike.baidu.com/item/hosts/10474546)为盒子IP，如我的配置如下：
 
 ```txt
-10.168.1.212        docker.home.com
-10.168.1.212        red.home.com
-10.168.1.212        hass.home.com
+10.168.1.212  docker.home.com
+10.168.1.212  red.home.com
+10.168.1.212  hass.home.com
 ```
 
 > 其中`10.168.1.212`为我盒子的IP地址
 
 ## 👷 OpenLdap
 
-容器里内置了OpenLdap账号管理，首次安装时需要每个单独配置。
-如若需要添加账号，请使用第三方OpenLdap管理工具进行添加，如：[LdapAdmin](http://www.ldapadmin.org/download/index.html)。默认的账号信息如下：
+容器里内置了[OpenLdap](https://www.openldap.org/)作为统一登陆的账号管理服务，他的好处就是一个账户登陆各种服务，再也不用为一个服务一个账户密码而烦恼。
+
+首次安装时需要每个服务单独配置，如：Portainer。因为账户不需要频繁增删改查，所以就没配置在线管理账户的服务。
+
+如若需要添加账号，请使用第三方OpenLdap管理工具进行添加，如：[LdapAdmin](http://www.ldapadmin.org/download/index.html)，默认的管理员账号信息如下：
 
 ```txt
 管理员账号：cn=admin,dc=home,dc=com
@@ -41,7 +44,7 @@ docker.home.com   Portainer.io
 
 #### Portainer.io
 
-配置示例
+进入到设置，找到认证，选择LDAP。配置示例：
 
 ```txt
 LDAP Server       ：127.0.0.1:389
@@ -57,7 +60,7 @@ Filter            ：(&(objectClass=posixAccount))
 ###### 📄 权限
 
 新登陆进来的LDAP用户，可以加入到`ldap-admin`的`teams`里，这样就能看到容器了。
-
+其他服务在启动的时候，就配置了这个属性。
 
 #### 🐔 Httpd
 
@@ -80,7 +83,7 @@ Filter            ：(&(objectClass=posixAccount))
 
 ## 💡 常见的问题
 
-```txt
+```text
 ######################################################
 表象：启动命令
 解决：docker-compose up --remove-orphans -d
