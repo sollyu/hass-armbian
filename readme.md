@@ -33,13 +33,12 @@
 
 ```bash
 #
-# 拉取本项目的代码，如果国内不能用可使用下面命令替换，效果是一样的。
-# https://gitclone.com/github.com/sollyu/hass-armbian.git
-# https://kgithub.com/sollyu/hass-armbian.git
-# https://github.moeyy.xyz/https://github.com/sollyu/hass-armbian.git
-# https://ghproxy.com/https://github.com/sollyu/hass-armbian.git
-# https://hub.njuu.cf/sollyu/hass-armbian.git
-# https://hub.yzuu.cf/sollyu/hass-armbian.git
+# 拉取本项目的代码，如果国内不能用可使用下面挑一个能用的命令替换，效果是一样的。
+# git clone https://gitclone.com/github.com/sollyu/hass-armbian.git
+# git clone https://kgithub.com/sollyu/hass-armbian.git
+# git clone https://github.moeyy.xyz/https://github.com/sollyu/hass-armbian.git
+# git clone https://ghproxy.com/https://github.com/sollyu/hass-armbian.git
+# git clone https://hub.njuu.cf/sollyu/hass-armbian.git
 #
 git clone https://github.com/sollyu/hass-armbian.git
 
