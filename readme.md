@@ -27,6 +27,34 @@
 
 > 其中`10.168.1.212`为我盒子的IP地址
 
+## 🔥 如何使用
+
+使用ssh或ttl进入到盒子并提前安装好docker，国内安装docker可参阅：[上海交通大学 Docker 软件源镜像服务](https://mirror.sjtu.edu.cn/docs/docker-ce)
+
+```bash
+#
+# 拉取本项目的代码，如果国内不能用可使用下面命令替换，效果是一样的。
+# https://gitclone.com/github.com/sollyu/hass-armbian.git
+# https://kgithub.com/sollyu/hass-armbian.git
+# https://github.moeyy.xyz/https://github.com/sollyu/hass-armbian.git
+# https://ghproxy.com/https://github.com/sollyu/hass-armbian.git
+# https://hub.njuu.cf/sollyu/hass-armbian.git
+# https://hub.yzuu.cf/sollyu/hass-armbian.git
+#
+git clone https://github.com/sollyu/hass-armbian.git
+
+
+# 进入项目文件夹
+cd hass-armbian
+
+#
+# docker启动
+# 第一次启动的时候需要注意configuration.yaml，可参阅常见问题
+#
+docker-compose up --remove-orphans -d
+
+```
+
 ## 👷 OpenLdap
 
 容器里内置了[OpenLdap](https://www.openldap.org/)作为统一登陆的账号管理服务，他的好处就是一个账户登陆各种服务，再也不用为一个服务一个账户密码而烦恼。
@@ -84,23 +112,22 @@ Filter            ：(&(objectClass=posixAccount))
 ## 💡 常见的问题
 
 ```text
-######################################################
-表象：启动命令
+表象：启动服务
 解决：docker-compose up --remove-orphans -d
 
-######################################################
+表象：Hass启动失败
+解决：初次启动的时候不要复制 configuration.yaml ，等第一次启动后再放回去。
+
+表象：停止全部服务
+解决：docker-compose down
+备注：手动停止后设备重启不会自动启动服务
+
 表象：NodeRed节点
 解决：node-red-contrib-home-assistant-websocket
 
-######################################################
-表象：Hass启动失败
-解决：初次启动的时候不要复制 configuration.yaml 。等第一次启动后再修改
-
-######################################################
 表象：HACS安装
 解决：https://github.com/hacs-china/integration
 
-######################################################
 表象：小米网关3
 解决：{"method":"set_ip_info","params":{"ssid":"\"\"","pswd":"123123 ; passwd -d admin ; echo enable > /sys/class/tty/tty/enable; telnetd"}}
 ```
