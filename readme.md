@@ -46,13 +46,22 @@ git clone https://github.com/sollyu/hass-armbian.git
 # 进入项目文件夹
 cd hass-armbian
 
-#
-# docker启动
-# 第一次启动的时候需要注意configuration.yaml，可参阅常见问题
-#
+# 启动所有服务
 docker-compose up --remove-orphans -d
 
+#
+# 等待hass启动完成之后（能打开网页就行不用配置，目前只能使用IP+端口的方法进行访问）
+# 把项目提供的配置文件替换到自动生成的配置文件
+#
+mv hass/configuration.replace.yaml hass/configuration.yaml
+
+#
+# 重启hass服务
+#
+docker restart HomeAssistant
 ```
+
+> 配置好本机或路由器的hosts就可以进行域名访问了，不配置只能使用IP+端口的方法进行使用
 
 ## 👷 OpenLdap
 
