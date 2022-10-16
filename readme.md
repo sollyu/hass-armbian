@@ -29,6 +29,22 @@
 
 ## 🔥 如何使用
 
+#### 一键安装
+
+###### ✅ 国内代理
+
+```shell
+curl https://ghproxy.com/https://raw.githubusercontent.com/wiki/sollyu/hass-armbian/install.sh | bash
+```
+
+###### Github原始
+
+```shell
+curl https://raw.githubusercontent.com/wiki/sollyu/hass-armbian/install.sh | bash
+```
+
+#### 手动安装
+
 使用ssh或ttl进入到盒子并提前安装好docker，国内安装docker可参阅：[上海交通大学 Docker 软件源镜像服务](https://mirror.sjtu.edu.cn/docs/docker-ce)
 
 ```bash
