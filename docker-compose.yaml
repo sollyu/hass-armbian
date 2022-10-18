@@ -41,7 +41,7 @@ services:
 
   portainer:
     container_name: Portainer
-    image: portainer/portainer:latest
+    image: portainer/portainer-ce:latest
     network_mode: host
     restart: unless-stopped
     cpus: 0.1
