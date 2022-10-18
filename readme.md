@@ -14,7 +14,8 @@
 | 6    | WatchTower    | Docker镜像自动更新 | -               |
 
 > 域名配置详情参照：[httpd-vhosts.conf](./httpd/conf/httpd-vhosts.conf)
-
+>
+> B站已同步相关的视频教程：https://b23.tv/MljyUoR 
 ###### 🚧 注意：
 
 如果需要使用域名访问，请手动在本机或者路由器中指定[hosts](https://baike.baidu.com/item/hosts/10474546)为盒子IP，如我的配置如下：
