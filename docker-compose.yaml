@@ -2,11 +2,11 @@ version: "2.3"
 services:
   hass:
     container_name: HomeAssistant
-    image: "ghcr.io/home-assistant/home-assistant:stable"
+    image: "home-assistant/home-assistant:stable"
     restart: unless-stopped
     network_mode: host
     cpus: 0.7
-    mem_limit: 256M
+    mem_limit: 512M
     volumes:
       - $PWD/hass:/config
     environment:
