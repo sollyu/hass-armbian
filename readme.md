@@ -28,57 +28,11 @@
 
 > 其中`10.168.1.212`为我盒子的IP地址
 
-## 🔥 如何使用
-
-#### 一键安装
-
-###### ✅ 国内代理
+## 🔥 一键安装
 
 ```shell
 curl https://ghproxy.com/https://raw.githubusercontent.com/wiki/sollyu/hass-armbian/install.sh | bash
 ```
-
-###### Github原始
-
-```shell
-curl https://raw.githubusercontent.com/wiki/sollyu/hass-armbian/install.sh | bash
-```
-
-#### 手动安装
-
-使用ssh或ttl进入到盒子并提前安装好docker，国内安装docker可参阅：[上海交通大学 Docker 软件源镜像服务](https://mirror.sjtu.edu.cn/docs/docker-ce)
-
-```bash
-#
-# 拉取本项目的代码，如果国内不能用可使用下面挑一个能用的命令替换，效果是一样的。
-# git clone https://gitclone.com/github.com/sollyu/hass-armbian.git
-# git clone https://kgithub.com/sollyu/hass-armbian.git
-# git clone https://github.moeyy.xyz/https://github.com/sollyu/hass-armbian.git
-# git clone https://ghproxy.com/https://github.com/sollyu/hass-armbian.git
-# git clone https://hub.njuu.cf/sollyu/hass-armbian.git
-#
-git clone https://github.com/sollyu/hass-armbian.git
-
-
-# 进入项目文件夹
-cd hass-armbian
-
-# 启动所有服务
-docker-compose up --remove-orphans -d
-
-#
-# 等待hass启动完成之后（能打开网页就行不用配置，目前只能使用IP+端口的方法进行访问）
-# 把项目提供的配置文件替换到自动生成的配置文件
-#
-mv hass/configuration.replace.yaml hass/configuration.yaml
-
-#
-# 重启hass服务
-#
-docker restart HomeAssistant
-```
-
-> 配置好本机或路由器的hosts就可以进行域名访问了，不配置只能使用IP+端口的方法进行使用
 
 ## 👷 OpenLdap
 
@@ -87,12 +41,11 @@ docker restart HomeAssistant
 首次安装时需要每个服务单独配置，如：Portainer。因为账户不需要频繁增删改查，所以就没配置在线管理账户的服务，同时也能节省盒子的资源。如若需要添加账号，可以使用第三方OpenLdap管理工具进行添加，如：[LdapAdmin](http://www.ldapadmin.org/download/index.html)，默认的管理员账号信息如下：
 
 ```txt
-管理员账号：cn=admin,dc=home,dc=com
-管理员密码：admin
+管理地址：127.0.0.1:389
+管理账号：cn=admin,dc=home,dc=com
+管理密码：admin
 ```
 
-> 如若修改管理员密码，请直接修改[docker-compose.yaml](./docker-compose.yaml#L105)的密码（改了密码其配置了地方也得改）。
-> 
 > 增加通用账户操作指引，参与[Wiki](https://github.com/sollyu/hass-armbian/wiki/OpenLdap%E6%B7%BB%E5%8A%A0%E8%B4%A6%E6%88%B7)。
 
 #### Portainer.io
@@ -100,7 +53,6 @@ docker restart HomeAssistant
 进入到设置，找到认证，选择LDAP。配置示例：
 
 ```txt
-LDAP Server       ：127.0.0.1:389
 Base DN           ：dc=home,dc=com
 Username attribute：uid
 Filter            ：(&(objectClass=posixAccount))
@@ -110,12 +62,16 @@ Filter            ：(&(objectClass=posixAccount))
 
 需要手动分配容器的访问权限，不然新账号里看不到内容。
 
-###### 📄 权限
+###### 📄 其他
 
-新登陆进来的LDAP用户，可以加入到`ldap-admin`的`teams`里，这样就能看到容器了。
-其他服务在启动的时候，就配置了这个属性。
+如果需要查询某个组中的成员，可参照下面配置
+```txt
+Group Base DN.            : cn=ldap-admin,dc=home,dc=com
+Group Membership Attribute: uniqueMember
+Group Filter.             : (objectClass=groupOfUniqueNames)
+```
 
-#### 🐔 Httpd
+## 🐔 Httpd
 
 对于一些没有提供账号管理的服务，可使用httpd自带的网关服务进行权限管控。这里罗列一下我配置，更为详细的参阅[官方文档](https://httpd.apache.org/docs/current/mod/mod_authnz_ldap.html#authldapurl)。
 
@@ -139,9 +95,6 @@ Filter            ：(&(objectClass=posixAccount))
 ```text
 表象：启动服务
 解决：docker-compose up --remove-orphans -d
-
-表象：Hass启动失败
-解决：初次启动的时候不要复制 configuration.yaml ，等第一次启动后再放回去。
 
 表象：停止全部服务
 解决：docker-compose down
