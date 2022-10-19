@@ -2,7 +2,7 @@ version: "2.3"
 services:
   hass:
     container_name: HomeAssistant
-    image: "home-assistant/home-assistant:stable"
+    image: "homeassistant/home-assistant:stable"
     restart: unless-stopped
     network_mode: host
     cpus: 0.7
