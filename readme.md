@@ -34,6 +34,19 @@
 curl https://ghproxy.com/https://raw.githubusercontent.com/wiki/sollyu/hass-armbian/install.sh | bash
 ```
 
+###### 经验之谈
+
+在执行命令之前可使用下列命令来手动拉去最新的Docker镜像，这样的好处就是可以很清楚的明白镜像拉取的进度以及国内镜像配置的情况。
+
+```bash
+docker pull homeassistant/home-assistant:stable
+docker pull nodered/node-red:latest
+docker pull portainer/portainer-ce:latest
+docker pull containrrr/watchtower:latest
+docker pull httpd:latest
+docker pull osixia/openldap:latest
+```
+
 ## 👷 OpenLdap
 
 容器里内置了[OpenLdap](https://www.openldap.org/)作为统一登陆的账号管理服务，他的好处就是一个账户登陆各种服务，再也不用为一个服务一个账户密码而烦恼。
