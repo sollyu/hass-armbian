@@ -21,7 +21,7 @@ services:
 
   nodered:
     container_name: NodeRed
-    image: nodered/node-red
+    image: nodered/node-red:latest
     restart: unless-stopped
     network_mode: host
     user: root
