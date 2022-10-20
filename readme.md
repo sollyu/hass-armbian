@@ -36,7 +36,7 @@ curl https://ghproxy.com/https://raw.githubusercontent.com/wiki/sollyu/hass-armb
 
 ###### 经验之谈
 
-在执行命令之前可使用下列命令来手动拉去最新的Docker镜像，这样的好处就是可以很清楚的明白镜像拉取的进度以及国内镜像配置的情况。
+在执行一键安装命令之前可使用下列命令来手动拉去最新的Docker镜像，这样的好处就是可以很清楚的明白镜像拉取的进度以及国内镜像配置的情况，省的执行一键安装命令在那里等的无聊透顶。
 
 ```bash
 docker pull homeassistant/home-assistant:stable
