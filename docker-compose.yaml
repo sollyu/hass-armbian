@@ -57,24 +57,6 @@ services:
         max-size: "200m"
         max-file: "3"
 
-  watchtower:
-    container_name: WatchTower
-    image: containrrr/watchtower:latest
-    restart: unless-stopped
-    command: --cleanup
-    network_mode: host
-    cpus: 0.1
-    mem_limit: 32M
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    labels:
-      io.portainer.accesscontrol.teams: ldap-admin
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "200m"
-        max-file: "3"
-
   httpd:
     container_name: Httpd
     image: httpd:latest
