@@ -2,7 +2,7 @@
 
 这是电视机顶盒个人使用Hass的套件服务，配置使用了[Httpd](https://httpd.apache.org/)做了常用服务域名化和一些服务优化：
 
-✅ **网页缓存**  ✅ **统一登录**  ✅ **自动更新**  ✅ **内存限制**  ✅ **数据分离**  ✅ **国内更新**
+✅ **网页缓存**  ✅ **统一登录**  ✅ **内存限制**  ✅ **数据分离**  ✅ **国内更新**
 
 | 序号 | 名称          | 说明               | 域名            |
 |------|---------------|--------------------|-----------------|
@@ -11,7 +11,6 @@
 | 3    | Portainer     | Docker容器管理     | docker.home.com |
 | 4    | OpenLdap      | 统一账户管理       | -               |
 | 5    | Httpd         | Http服务           | -               |
-| 6    | WatchTower    | Docker镜像自动更新 | -               |
 
 > 域名配置详情参照：[httpd-vhosts.conf](./httpd/conf/httpd-vhosts.conf)
 >
@@ -42,7 +41,6 @@ curl https://ghproxy.com/https://raw.githubusercontent.com/wiki/sollyu/hass-armb
 docker pull homeassistant/home-assistant:stable
 docker pull nodered/node-red:latest
 docker pull portainer/portainer-ce:latest
-docker pull containrrr/watchtower:latest
 docker pull httpd:latest
 docker pull osixia/openldap:latest
 ```
