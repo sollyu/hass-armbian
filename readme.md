@@ -30,7 +30,7 @@
 ## 🔥 一键安装
 
 ```shell
-curl https://ghproxy.com/https://raw.githubusercontent.com/wiki/sollyu/hass-armbian/install.sh | bash
+curl https://ghproxy.com/https://raw.githubusercontent.com/wiki/sollyu/hass-armbian/shell/install.v1.sh | bash
 ```
 
 ###### 经验之谈
